@@ -1,39 +1,33 @@
+
 <!DOCTYPE html>
-<html lang="en-US" class="transparentSkybridgeBackground desktopSkybridge dark" data-theme="dark" style="color-scheme: dark; --safe-area-inset-top: 0px; --safe-area-inset-bottom: 0px; --safe-area-inset-left: 0px; --safe-area-inset-right: 0px;"><head><style>@layer sandbox-defaults{html,body,#root{margin:0;padding:0}}</style>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CPExplore</title>
+<meta name="theme-color" content="#101b2a">
+<title>CPEC</title>
 
-<!-- =====================================================
-     CPEXplore | AI RESEARCH WEBSITE
-     Main structure and visual design
-     ===================================================== -->
-
-<!-- GOOGLE FONTS
-     You can replace these fonts if you prefer another style.
-     Space Grotesk = headings
-     Inter = body text
--->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
-/* =====================================================
-   1. WEBSITE COLORS AND GLOBAL SETTINGS
-   Change the color values here to customize the theme.
-   ===================================================== */
 :root {
-    --bg: #0b1020;
-    --bg-light: #111a2e;
-    --card: #17233a;
-    --text: #f4f7fb;
-    --muted: #a7b4c9;
-    --accent: #65e6cf;
-    --accent-blue: #6ca8ff;
-    --border: rgba(255,255,255,0.12);
-    --heading-font: 'Space Grotesk', sans-serif;
-    --body-font: 'DM Sans', sans-serif;
+    --bg: #101b2a;
+    --bg-deep: #0b1420;
+    --bg-soft: #172638;
+    --surface: #1b2d40;
+    --surface-light: #22384d;
+    --text: #f2f0e9;
+    --muted: #aab7c2;
+    --accent: #b8d8c0;
+    --accent-dark: #7fae91;
+    --gold: #d7bd88;
+    --border: rgba(230,240,235,.13);
+    --heading: 'Manrope', sans-serif;
+    --body: 'DM Sans', sans-serif;
+    --serif: 'Playfair Display', serif;
+    --container: 1160px;
 }
 
 * {
@@ -50,8 +44,20 @@ html {
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--body-font);
-    line-height: 1.7;
+    font-family: var(--body);
+    line-height: 1.75;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 85% 12%, rgba(127,174,145,.08), transparent 28%),
+        radial-gradient(circle at 8% 65%, rgba(215,189,136,.045), transparent 25%);
 }
 
 a {
@@ -64,21 +70,66 @@ img {
     max-width: 100%;
 }
 
-/* General content width */
 .container {
-    width: min(1160px, 90%);
-    margin: auto;
+    width: min(var(--container), 88%);
+    margin: 0 auto;
 }
 
-/* =====================================================
-   2. NAVIGATION BAR
-   Change the website name or navigation labels here.
-   ===================================================== */
+section {
+    padding: 105px 0;
+    position: relative;
+}
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--accent);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.section-label::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+}
+
+.section-title {
+    font-family: var(--heading);
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1.8px;
+    max-width: 780px;
+    margin-bottom: 22px;
+}
+
+.section-title em {
+    color: var(--accent);
+    font-family: var(--serif);
+    font-weight: 500;
+}
+
+.section-description {
+    color: var(--muted);
+    max-width: 720px;
+    font-size: .98rem;
+}
+
+.section-heading {
+    margin-bottom: 48px;
+}
+
 header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(11,16,32,0.92);
+    z-index: 1000;
+    background: rgba(11,20,32,.93);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
 }
@@ -86,16 +137,17 @@ header {
 .navbar {
     min-height: 76px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 25px;
 }
 
 .logo {
-    font-family: var(--heading-font);
+    font-family: var(--heading);
     font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    white-space: nowrap;
 }
 
 .logo span {
@@ -106,464 +158,1065 @@ header {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 22px;
     list-style: none;
-    font-size: 0.88rem;
-    color: var(--muted);
-}
-
-.nav-links a:hover {
-    color: var(--accent);
 }
 
 .nav-links a {
+    color: var(--muted);
+    font-size: .77rem;
+    transition: color .2s ease;
     position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent);
 }
 
 .nav-links a::after {
     content: "";
     position: absolute;
+    bottom: -9px;
     left: 0;
-    right: 0;
-    bottom: -5px;
-    height: 2px;
+    width: 100%;
+    height: 1px;
     background: var(--accent);
     transform: scaleX(0);
-    transition: transform .2s ease;
-}
-
-.nav-links a.active {
-    color: var(--accent);
+    transform-origin: left;
+    transition: transform .25s ease;
 }
 
 .nav-links a.active::after {
     transform: scaleX(1);
 }
 
-.nav-cta {
-    border: 1px solid var(--accent);
-    padding: 9px 16px;
-    border-radius: 30px;
-    color: var(--accent);
-    font-size: 0.85rem;
-}
+/* HERO */
 
-/* =====================================================
-   3. HERO SECTION
-   Replace the background image URL with another photo.
-   ===================================================== */
 .hero {
-    min-height: 100vh;
+    min-height: 690px;
+    height: calc(100vh - 76px);
+    max-height: 900px;
     display: flex;
     align-items: center;
     position: relative;
+    isolation: isolate;
     overflow: hidden;
+    background: #101b2a;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
     background:
-        linear-gradient(90deg, rgba(7,13,27,.97) 5%, rgba(7,13,27,.75) 52%, rgba(7,13,27,.2)),
+        linear-gradient(90deg, rgba(9,17,27,.97) 0%, rgba(9,17,27,.87) 42%, rgba(9,17,27,.35) 100%),
+        linear-gradient(0deg, rgba(9,17,27,.8), transparent 55%),
         url('https://i.pinimg.com/1200x/43/f9/ca/43f9cabe43cb66bfa5c115f723660689.jpg') center/cover;
 }
 
-.hero-content {
-    max-width: 780px;
-    padding: 100px 0;
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border: 1px solid rgba(184,216,192,.12);
+    border-radius: 50%;
+    right: -140px;
+    bottom: -250px;
+    box-shadow: 0 0 0 45px rgba(184,216,192,.025),
+                0 0 0 90px rgba(184,216,192,.02);
+    pointer-events: none;
 }
 
-.eyebrow {
-    display: inline-block;
+/* HERO IMAGE SOURCE */
+
+.hero-image-source {
+    position: absolute;
+    right: 6%;
+    bottom: 75px;
+    z-index: 3;
+    max-width: 300px;
+    text-align: right;
+    color: rgba(230,240,235,.8);
+    font-size: .68rem;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.hero-image-source a {
     color: var(--accent);
-    font-size: 0.76rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.hero-content {
+    max-width: 820px;
+    padding: 100px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: var(--accent);
+    font-size: .73rem;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
+}
+
+.hero-kicker::before {
+    content: "";
+    width: 38px;
+    height: 1px;
+    background: var(--accent);
 }
 
 .hero h1 {
-    font-family: var(--heading-font);
-    font-size: clamp(3rem, 7vw, 6.3rem);
-    line-height: 1.02;
-    letter-spacing: -4px;
-    margin-bottom: 28px;
+    font-family: var(--heading);
+    font-size: clamp(4rem, 9vw, 8rem);
+    line-height: .98;
+    letter-spacing: -7px;
+    font-weight: 800;
+    margin-bottom: 30px;
 }
 
 .hero h1 span {
+    display: block;
     color: var(--accent);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: -5px;
 }
 
-.hero p {
-    max-width: 620px;
-    font-size: 1.08rem;
-    color: #d1d9e8;
+.hero-description {
+    max-width: 640px;
+    color: #d0d8d8;
+    font-size: 1.05rem;
+    line-height: 1.8;
     margin-bottom: 35px;
 }
 
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 25px;
+}
+
 .hero-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 21px;
     background: var(--accent);
-    color: #071521;
+    color: #12231b;
+    font-size: .85rem;
     font-weight: 700;
-    padding: 14px 25px;
-    border-radius: 5px;
     transition: .25s;
 }
 
 .hero-button:hover {
+    background: #e1eee3;
     transform: translateY(-3px);
-    background: white;
 }
 
-/* Small information below hero button */
-.hero-note {
-    margin-top: 28px;
-    color: var(--muted);
-    font-size: .82rem;
+.hero-secondary {
+    color: #d4ded9;
+    font-size: .83rem;
+    border-bottom: 1px solid rgba(212,222,217,.5);
+    padding-bottom: 5px;
 }
 
-/* =====================================================
-   4. INTRODUCTION SECTION
-   Two-column layout: text on left, image on right.
-   ===================================================== */
-section {
-    padding: 100px 0;
-}
-
-.section-label {
-    color: var(--accent);
+.hero-bottom {
+    position: absolute;
+    bottom: 35px;
+    left: 6%;
+    right: 6%;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(230,240,235,.65);
+    font-size: .7rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: .75rem;
-    font-weight: 700;
-    margin-bottom: 14px;
 }
 
-.section-title {
-    font-family: var(--heading-font);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.15;
-    letter-spacing: -1.5px;
-    margin-bottom: 25px;
-}
+/* INTRODUCTION */
 
-.section-description {
-    color: var(--muted);
-    max-width: 700px;
+.intro-section {
+    background: var(--bg);
 }
 
 .intro-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 75px;
     align-items: center;
-    gap: 65px;
-}
-
-.intro-image {
-    width: 100%;
-    height: 430px;
-    object-fit: cover;
-    border-radius: 8px;
 }
 
 .intro-text p {
     color: var(--muted);
-    margin-bottom: 18px;
+    font-size: .94rem;
+    margin-bottom: 20px;
 }
 
-/* =====================================================
-   5. RESEARCH OVERVIEW / STATISTIC CARDS
-   Replace these sample values with verified research data.
-   Never present placeholders as actual survey findings.
-   ===================================================== */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 45px;
+.intro-text p strong {
+    color: var(--text);
+    font-weight: 600;
 }
 
-.stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 30px;
-    border-radius: 8px;
+.intro-image-wrap {
+    position: relative;
+    padding: 0 0 25px 25px;
 }
 
-.stat-card h3 {
-    font-family: var(--heading-font);
-    font-size: 2.3rem;
+.intro-image-wrap::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 75%;
+    height: 75%;
+    border-left: 1px solid var(--accent-dark);
+    border-bottom: 1px solid var(--accent-dark);
+}
+
+.intro-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 490px;
+    object-fit: cover;
+    filter: saturate(.78);
+}
+
+.image-caption {
+    margin-left: auto;
+    background: var(--surface);
+    padding: 15px 19px;
+    color: var(--muted);
+    font-size: .72rem;
+    max-width: 230px;
+    border-left: 2px solid var(--accent);
+}
+
+/* IMAGE SOURCE CAPTIONS */
+
+.image-source {
+    display: block;
+    position: relative;
+    z-index: 3;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: .68rem;
+    font-style: italic;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.image-source a {
     color: var(--accent);
-    margin-bottom: 10px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-.stat-card p {
+.image-source a:hover {
+    color: white;
+}
+
+/* BACKGROUND */
+
+.background-section {
+    background: var(--bg-soft);
+    overflow: hidden;
+}
+
+.background-section::before {
+    content: "BACKGROUND";
+    position: absolute;
+    top: 60px;
+    right: -20px;
+    color: rgba(255,255,255,.025);
+    font-family: var(--heading);
+    font-weight: 800;
+    font-size: clamp(5rem, 13vw, 12rem);
+    letter-spacing: -8px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.background-intro {
+    max-width: 800px;
+    color: var(--muted);
+    margin-bottom: 55px;
+}
+
+.background-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+}
+
+.background-card {
+    background: var(--bg-soft);
+    padding: 38px;
+    min-height: 270px;
+    transition: background .25s;
+}
+
+.background-card:hover {
+    background: #1d3043;
+}
+
+.background-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.background-card-number {
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-style: italic;
+}
+
+.background-card-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+
+.background-card h3 {
+    font-family: var(--heading);
+    font-size: 1.28rem;
+    margin-bottom: 14px;
+}
+
+.background-card p {
     color: var(--muted);
     font-size: .9rem;
 }
 
-/* =====================================================
-   6. TOPIC DISCUSSION CARDS
-   Add or remove cards by copying the article element.
-   ===================================================== */
-.topic-section {
-    background: var(--bg-light);
+/* RESEARCH OVERVIEW */
+
+.research-section {
+    background: var(--bg);
 }
 
-.topic-grid {
+.research-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 18px;
     margin-top: 45px;
 }
 
-.topic-card {
-    background: var(--card);
+.research-card {
+    min-height: 245px;
+    padding: 30px;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    background: linear-gradient(145deg, var(--surface), rgba(27,45,64,.55));
+    position: relative;
     overflow: hidden;
     transition: .25s;
 }
 
-.topic-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
+.research-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(184,216,192,.5);
 }
 
-.topic-card img {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
+.research-card-number {
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-style: italic;
 }
+
+.research-card h3 {
+    font-family: var(--heading);
+    font-size: 1.3rem;
+    margin: 25px 0 12px;
+}
+
+.research-card p {
+    color: var(--muted);
+    font-size: .88rem;
+}
+
+/* DISCUSSION */
+
+.topic-section {
+    background: var(--bg-soft);
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* DISCUSSION CARDS */
+
+.topic-card {
+    display: grid;
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 280px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    transition: .25s;
+    overflow: hidden;
+}
+
+.topic-card:hover {
+    border-color: rgba(184,216,192,.5);
+    transform: translateY(-3px);
+}
+
+/* DISCUSSION IMAGES
+   Complete image is displayed without cropping. */
+
+.topic-image-wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    min-width: 0;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: var(--bg-deep);
+}
+
+.topic-image-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: 340px;
+    flex: 0 1 auto;
+    object-fit: contain;
+    object-position: center;
+    filter: saturate(.85);
+    transition: .4s;
+}
+
+.topic-card:hover .topic-image-wrap img {
+    filter: saturate(1);
+}
+
+.topic-image-wrap .image-source {
+    width: 100%;
+    margin-top: 9px;
+    padding: 0;
+    font-size: .64rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* DISCUSSION TEXT */
 
 .topic-card-content {
-    padding: 25px;
+    min-width: 0;
+    padding: 28px;
 }
 
 .topic-card-content small {
     color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: .7rem;
+    font-size: .68rem;
     font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
-.topic-card h3 {
-    font-family: var(--heading-font);
-    font-size: 1.35rem;
-    margin: 12px 0;
+.topic-card-content h3 {
+    font-family: var(--heading);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin: 12px 0 16px;
 }
 
-.topic-card p {
+.topic-card-content p {
     color: var(--muted);
-    font-size: .9rem;
+    font-size: .88rem;
+    line-height: 1.75;
+    margin-bottom: 14px;
 }
 
-/* =====================================================
-   7. RESEARCH VARIABLES / COMPARISON TABLE
-   Replace sample entries with your actual research content.
-   ===================================================== */
+.topic-card-content p:last-child {
+    margin-bottom: 0;
+}
+
+.topic-card-content p a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.topic-card-content p a:hover {
+    color: white;
+}
+
+/* FRAMEWORK */
+
+.framework-section {
+    background: var(--bg);
+}
+
 .table-wrapper {
     overflow-x: auto;
-    margin-top: 35px;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    background: var(--surface);
+    margin-top: 35px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     min-width: 650px;
-    background: var(--card);
-}
-
-th, td {
-    text-align: left;
-    padding: 19px;
-    border-bottom: 1px solid var(--border);
 }
 
 th {
+    text-align: left;
+    padding: 20px 23px;
     color: var(--accent);
-    background: #1d2b43;
-    font-family: var(--heading-font);
+    background: #22384d;
+    font-family: var(--heading);
+    font-size: .78rem;
 }
 
 td {
+    padding: 20px 23px;
+    border-top: 1px solid var(--border);
     color: var(--muted);
-    font-size: .9rem;
+    font-size: .88rem;
+    vertical-align: top;
 }
 
-/* =====================================================
-   8. SIGNIFICANCE / STAKEHOLDERS
-   ===================================================== */
-.stakeholder-grid {
+td:first-child {
+    color: var(--text);
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    background: rgba(184,216,192,.045);
+}
+
+.framework-footnote {
+    color: var(--muted);
+    font-size: .78rem;
+    margin-top: 15px;
+}
+
+/* SIGNIFICANCE */
+
+.significance-section {
+    background: var(--bg-soft);
+}
+
+.significance-layout {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-top: 40px;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 75px;
+    align-items: start;
+}
+
+.significance-intro {
+    position: sticky;
+    top: 120px;
+}
+
+.significance-intro p {
+    color: var(--muted);
+    font-size: .92rem;
+}
+
+.stakeholder-list {
+    border-top: 1px solid var(--border);
 }
 
 .stakeholder-card {
-    padding: 27px;
-    background: var(--card);
-    border-left: 3px solid var(--accent);
-    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 20px;
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.stakeholder-number {
+    color: var(--gold);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25rem;
 }
 
 .stakeholder-card h3 {
-    font-family: var(--heading-font);
-    margin-bottom: 10px;
+    font-family: var(--heading);
+    font-size: 1.12rem;
+    margin-bottom: 7px;
 }
 
 .stakeholder-card p {
     color: var(--muted);
-    font-size: .9rem;
+    font-size: .88rem;
 }
 
-/* =====================================================
-   9. DEVELOPERS SECTION
-   Replace the placeholder image URLs with member photos.
-   Keep the names in alphabetical order.
-   ===================================================== */
+/* DEVELOPERS */
+
 .developers-section {
-    background: var(--bg-light);
+    background: var(--bg);
 }
 
 .developer-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 45px;
+    gap: 18px;
 }
 
 .developer-card {
-    background: var(--card);
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 7px;
     overflow: hidden;
+    transition: .25s;
+}
+
+.developer-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(184,216,192,.45);
+}
+
+.developer-image-wrap {
+    overflow: hidden;
+    background: #26394a;
 }
 
 .developer-card img {
     width: 100%;
-    height: 220px;
+    height: 250px;
     object-fit: cover;
-    background: #25344c;
+    object-position: center 30%;
+    filter: saturate(.8);
+    transition: transform .4s, filter .4s;
+}
+
+.developer-card:hover img {
+    transform: scale(1.045);
+    filter: saturate(1);
 }
 
 .developer-info {
-    padding: 17px;
+    padding: 18px;
+    min-height: 100px;
 }
 
 .developer-info h3 {
-    font-size: .95rem;
+    font-size: .88rem;
+    line-height: 1.45;
     font-weight: 600;
 }
 
 .developer-info p {
-    color: var(--muted);
-    font-size: .78rem;
-    margin-top: 5px;
+    color: var(--accent);
+    font-size: .72rem;
+    margin-top: 7px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
 }
 
-/* =====================================================
-   10. REFERENCES
-   Put your APA 7 references in this section.
-   Add one new <li> for every source.
-   ===================================================== */
-.references {
-    background: var(--bg);
+/* REFERENCES */
+
+.references-section {
+    background: var(--bg-soft);
+}
+
+.references-layout {
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 75px;
+    align-items: start;
+}
+
+.references-intro p {
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.reference-category {
+    color: var(--accent);
+    font-family: var(--heading);
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 35px 0 12px;
 }
 
 .reference-list {
-    margin-top: 35px;
-    padding-left: 25px;
+    list-style: none;
+    border-top: 1px solid var(--border);
 }
 
 .reference-list li {
-    color: var(--muted);
-    padding: 12px 0;
+    padding: 19px 0;
     border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .85rem;
     overflow-wrap: anywhere;
+    padding-left: 28px;
+    text-indent: -28px;
 }
 
 .reference-list a {
     color: var(--accent);
     text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
 }
 
-/* =====================================================
-   11. FOOTER
-   ===================================================== */
+.reference-list a:hover {
+    color: white;
+}
+
+.image-reference-note {
+    color: var(--muted);
+    font-size: .8rem;
+    margin-top: 15px;
+}
+
+/* FOOTER */
+
 footer {
+    background: var(--bg-deep);
     border-top: 1px solid var(--border);
-    padding: 35px 0;
+    padding: 45px 0 25px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding-bottom: 35px;
+}
+
+.footer-logo {
+    font-family: var(--heading);
+    font-size: 1.7rem;
+    font-weight: 800;
+}
+
+.footer-logo span {
+    color: var(--accent);
+    font-style: italic;
+}
+
+.footer-tagline {
     color: var(--muted);
     font-size: .85rem;
 }
 
-.footer-content {
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 15px;
+    color: #82919d;
+    font-size: .73rem;
 }
 
-/* =====================================================
-   12. RESPONSIVE DESIGN
-   Adjusts the layout for tablets and mobile phones.
-   ===================================================== */
-@media (max-width: 850px) {
+.back-to-top {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-size: 1.2rem;
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: .25s;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .65s ease, transform .65s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
     .nav-links {
-        gap: 12px;
-        font-size: .75rem;
+        gap: 13px;
+    }
+
+    .nav-links a {
+        font-size: .7rem;
     }
 
     .intro-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .topic-grid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 45px;
     }
 
     .developer-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .topic-card {
+        grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 820px) {
     .navbar {
-        flex-direction: column;
-        padding: 15px 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 16px 0;
+        gap: 15px;
     }
 
     .nav-links {
-        flex-wrap: wrap;
+        order: 3;
+        width: 100%;
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
     }
 
     .hero {
-        min-height: 100vh;
+        height: auto;
+        min-height: 680px;
     }
 
-    .hero h1 {
-        letter-spacing: -2px;
+    .intro-grid,
+    .significance-layout,
+    .references-layout {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .intro-image-wrap {
+        max-width: 600px;
+    }
+
+    .significance-intro {
+        position: static;
+    }
+
+    .research-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topic-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* KEEP EACH DISCUSSION CARD HORIZONTAL */
+
+    .topic-card {
+        grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 580px) {
+    .container {
+        width: 90%;
     }
 
     section {
-        padding: 70px 0;
+        padding: 75px 0;
     }
 
-    .stats-grid,
-    .topic-grid,
-    .stakeholder-grid {
+    .nav-links {
+        gap: 10px 14px;
+    }
+
+    .nav-links a {
+        font-size: .68rem;
+    }
+
+    .hero {
+        min-height: 680px;
+    }
+
+    .hero h1 {
+        font-size: clamp(3.6rem, 16vw, 5.5rem);
+        letter-spacing: -4px;
+    }
+
+    .hero h1 span {
+        letter-spacing: -3px;
+    }
+
+    .hero-description {
+        font-size: .93rem;
+    }
+
+    .hero-bottom {
+        font-size: .56rem;
+    }
+
+    .hero-image-source {
+        bottom: 45px;
+        right: 5%;
+        max-width: 240px;
+        font-size: .62rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+
+    .intro-image {
+        height: 330px;
+    }
+
+    .background-grid,
+    .research-grid {
         grid-template-columns: 1fr;
+    }
+
+    .background-card {
+        min-height: auto;
+        padding: 27px;
+    }
+
+    /* KEEP DISCUSSION CARDS HORIZONTAL ON MOBILE */
+
+    .topic-card {
+        grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+        min-height: 220px;
+    }
+
+    .topic-image-wrap {
+        width: 100%;
+        height: 100%;
+        min-height: 220px;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .topic-image-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: 220px;
+        flex: 0 1 auto;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .topic-image-wrap .image-source {
+        font-size: .58rem;
+        line-height: 1.4;
+        margin-top: 7px;
+    }
+
+    .topic-card-content {
+        min-width: 0;
+        padding: 16px;
+    }
+
+    .topic-card-content small {
+        font-size: .58rem;
+        letter-spacing: 1px;
+    }
+
+    .topic-card-content h3 {
+        font-size: .95rem;
+        line-height: 1.35;
+        margin: 9px 0 12px;
+    }
+
+    .topic-card-content p {
+        font-size: .76rem;
+        line-height: 1.6;
+        margin-bottom: 11px;
     }
 
     .developer-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
-    .intro-image {
-        height: 280px;
+    .developer-card img {
+        height: 190px;
+    }
+
+    .developer-info {
+        padding: 13px;
+    }
+
+    .developer-info h3 {
+        font-size: .78rem;
+    }
+
+    .developer-info p {
+        font-size: .65rem;
+    }
+
+    .stakeholder-card {
+        grid-template-columns: 35px 1fr;
+        gap: 12px;
+    }
+
+    .footer-top,
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
     }
 }
 </style>
@@ -571,230 +1224,524 @@ footer {
 
 <body>
 
-<!-- =====================================================
-     NAVIGATION
-     The href values link to the IDs of page sections.
-     ===================================================== -->
 <header>
     <div class="container navbar">
         <a href="#home" class="logo">CPE<span>xplore</span></a>
 
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#about">Introduction</a></li>
+            <li><a href="#background">Background</a></li>
             <li><a href="#research">Research</a></li>
             <li><a href="#discussion">Discussion</a></li>
             <li><a href="#significance">Significance</a></li>
             <li><a href="#developers">Developers</a></li>
             <li><a href="#references">References</a></li>
         </ul>
+
     </div>
 </header>
 
-<!-- =====================================================
-     HERO / HOMEPAGE
-     Change the title and introduction to your final topic.
-     ===================================================== -->
 <main>
+
+<!-- HERO -->
+
 <section class="hero" id="home">
+
+    <div class="hero-image-source">
+        <em>Source: <a href="https://i.pinimg.com/1200x/43/f9/ca/43f9cabe43cb66bfa5c115f723660689.jpg" target="_blank" rel="noopener noreferrer">Pinterest</a></em>
+    </div>
+
     <div class="container">
         <div class="hero-content">
-            <span class="eyebrow">The Digital Shift in Engineering Education</span>
+            <div class="hero-kicker">Where Curiosity Meets Engineering.</div>
 
             <h1>
-                Beyond the<br>
-                <span>Coding.</span>
+                Beyond the
+                <span>Coding:</span>
             </h1>
 
-            <p>
+            <p class="hero-description">
                 Investigating the Impact of Technology Use on Academic
-                <br>Performance Among First-Year Computer Engineering Students
+                Performance Among First-Year Computer Engineering Students.
             </p>
-
-          
-            </div>
         </div>
     </div>
 </section>
 
-<!-- =====================================================
-     ABOUT THE STUDY
-     ===================================================== -->
-<section id="about">
+<!-- INTRODUCTION -->
+
+<section class="intro-section" id="about">
     <div class="container intro-grid">
-        <div class="intro-text">
+        <div class="intro-text reveal">
             <div class="section-label">01 / Introduction</div>
 
             <h2 class="section-title">
-                A new era of learning begins with AI.
+                The digital shift in <em>engineering education.</em>
             </h2>
 
             <p>
-                Artificial Intelligence is increasingly becoming part
-                of modern education. From generating explanations to
-                assisting with programming, AI-powered tools are changing
-                how students approach academic tasks.
+                <strong>The New Normal in Philippine Higher Education.</strong>
+                Philippine colleges and universities have fully embraced
+                hybrid and blended learning. This shift gives students
+                greater flexibility and access to digital learning resources.
+                However, it also highlights persistent challenges such as
+                unstable internet connections, limited access to devices,
+                and unequal technological resources. These barriers continue
+                to influence how effectively students participate in modern
+                learning environments (Espinosa et al., 2023).
             </p>
 
             <p>
-                For first-year Computer Engineering students, these
-                technologies present both opportunities and challenges.
-                Understanding their influence is important as students
-                begin developing the technical knowledge and problem-solving
-                skills required in the field.
+                <strong>The Rise of AI and the Attention Dilemma.</strong>
+                Today's college students are learning in an era shaped by
+                Generative AI tools such as ChatGPT. These platforms can
+                support research, problem-solving, and content creation,
+                making academic tasks more efficient. At the same time,
+                concerns about overreliance, academic integrity, and the
+                weakening of critical thinking skills have emerged when AI
+                is used irresponsibly (Hortelano &amp; Salamia, 2025).
             </p>
 
             <p>
-                This research explores the relationship between AI use
-                and the learning experiences of first-year CpE students.
+                Technology has become a double-edged sword in higher
+                education. It can enhance learning when used for academic
+                purposes such as research, programming, and collaboration,
+                but it can also become a source of distraction through
+                excessive gaming, social media use, and online entertainment.
+                As a result, the impact of technology depends largely on
+                how students use it (Rizada &amp; Rey, 2023).
             </p>
         </div>
 
-        <!-- Replace this image URL with your chosen real photograph. -->
-        <img
-            class="intro-image"
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1100&q=85"
-            alt="Students collaborating around a laptop">
+        <div class="intro-image-wrap reveal">
+
+            <img
+                class="intro-image"
+                src="https://filipinotimes.net/wp-content/uploads/2017/06/a025.jpg"
+                alt="Students in an educational setting">
+
+            <div class="image-caption">
+                Technology is now part of the everyday learning experience.
+            </div>
+
+            <em class="image-source">
+                Source: <a href="https://filipinotimes.net/wp-content/uploads/2017/06/a025.jpg" target="_blank" rel="noopener noreferrer">The Filipino Times</a>
+            </em>
+
+        </div>
     </div>
 </section>
 
-<!-- =====================================================
-     RESEARCH OVERVIEW
-     IMPORTANT: These are content prompts, not real statistics.
-     Replace them with verified figures from your research.
-     ===================================================== -->
-<section id="research" style="background:var(--bg-light)">
+<!-- BACKGROUND OF THE STUDY -->
+
+<section class="background-section" id="background">
     <div class="container">
-        <div class="section-label">02 / Research Overview</div>
+        <div class="section-label">02 / Background of the Study</div>
 
-        <h2 class="section-title">Understanding the bigger picture.</h2>
+        <div class="section-heading reveal">
+            <h2 class="section-title">
+                Navigating challenges among <em>Computer Engineering students.</em>
+            </h2>
 
-        <p class="section-description">
-            Examine the different dimensions of AI use among
-            first-year Computer Engineering students.
-        </p>
+            <p class="background-intro">
+                For first-year Computer Engineering students, technology is
+                more than an additional learning resource. It is part of
+                how they study, communicate, solve problems, and adjust to
+                college life. Understanding its influence means looking
+                beyond access and examining how students actually use it.
+            </p>
+        </div>
 
-        <div class="stats-grid">
-            <article class="stat-card">
-                <h3>01</h3>
-                <p><strong>AI Utilization</strong><br>
-                How frequently students use AI tools for academic activities.</p>
+        <div class="background-grid">
+            <article class="background-card reveal">
+                <div class="background-card-top">
+                    <span class="background-card-number">01</span>
+                    <span class="background-card-icon">⌘</span>
+                </div>
+
+                <h3>The Computer Engineering Experience</h3>
+
+                <p>
+                    Modern Computer Engineering education relies heavily on
+                    the integration of digital technologies in teaching and
+                    learning. Computer Engineering students regularly use
+                    programming platforms, digital learning systems,
+                    simulations, and online collaboration tools as part of
+                    their academic training.
+                </p>
+
+                <p>
+                    However, first-year CpE students face a significant
+                    transition as they move from high school to a rigorous,
+                    technology-driven college environment. Many freshmen
+                    struggle with workload management, independent learning,
+                    and adapting to hybrid learning setups while meeting
+                    the demands of engineering education (Firmante, 2024).
+                </p>
+
+                <p>
+                    Freshmen are a particularly important group to study
+                    because they are still developing the study habits,
+                    digital literacy skills, and time-management strategies
+                    needed to succeed in a technology-rich academic
+                    environment.
+                </p>
             </article>
 
-            <article class="stat-card">
-                <h3>02</h3>
-                <p><strong>Learning Experience</strong><br>
-                How AI influences understanding, productivity, and learning habits.</p>
+            <article class="background-card reveal">
+                <div class="background-card-top">
+                    <span class="background-card-number">02</span>
+                    <span class="background-card-icon">◎</span>
+                </div>
+
+                <h3>Access Is Not Enough</h3>
+
+                <p>
+                    While access to laptops, smartphones, and internet
+                    connectivity is important, it does not automatically
+                    lead to academic success. Research suggests that
+                    students perform better when they possess strong
+                    self-regulation skills, digital literacy, and confidence
+                    in using technology effectively. What matters most is
+                    not simply having access to technology, but knowing
+                    how to use it purposefully and responsibly
+                    (Briones et al., 2023; Gayrama, 2025).
+                </p>
             </article>
 
-            <article class="stat-card">
-                <h3>03</h3>
-                <p><strong>Challenges</strong><br>
-                Issues involving accuracy, dependency, and academic integrity.</p>
+            <article class="background-card reveal">
+                <div class="background-card-top">
+                    <span class="background-card-number">03</span>
+                    <span class="background-card-icon">⌁</span>
+                </div>
+
+                <h3>The Core Challenge</h3>
+
+                <p>
+                    This study investigates a contemporary challenge faced
+                    by first-year Computer Engineering students: How does
+                    the frequency and purpose of technology use affect
+                    academic performance?
+                </p>
+
+                <p>
+                    Specifically, the study examines whether students use
+                    technology primarily for productive academic activities
+                    such as programming, online research, note-taking, and
+                    AI-assisted learning, or for non-academic activities
+                    such as social media, gaming, and entertainment. It
+                    then explores how these technology-use patterns may
+                    influence academic outcomes and overall student success.
+                </p>
+            </article>
+
+            <article class="background-card reveal">
+                <div class="background-card-top">
+                    <span class="background-card-number">04</span>
+                    <span class="background-card-icon">✳</span>
+                </div>
+
+                <h3>Why This Matters</h3>
+
+                <p>
+                    Understanding how technology influences academic
+                    performance can help students develop healthier and
+                    more productive digital habits. The findings may also
+                    assist educators and university administrators in
+                    designing programs and policies that strengthen digital
+                    literacy, encourage responsible technology use, and
+                    support the academic success and well-being of first-year
+                    Computer Engineering students.
+                </p>
             </article>
         </div>
     </div>
 </section>
 
-<!-- =====================================================
-     DISCUSSION
-     Copy an entire article block to add another topic.
-     ===================================================== -->
+<!-- RESEARCH OVERVIEW -->
+
+<section class="research-section" id="research">
+    <div class="container">
+        <div class="section-heading reveal">
+            <div class="section-label">03 / Research Overview</div>
+
+            <h2 class="section-title">
+                Understanding the <em>bigger picture.</em>
+            </h2>
+
+            <p class="section-description">
+                Technology use is not limited to a single activity.
+                Students move between academic and nonacademic digital
+                environments throughout the day. This study looks at
+                three dimensions of that experience.
+            </p>
+        </div>
+
+        <div class="research-grid">
+            <article class="research-card reveal">
+                <span class="research-card-number">01</span>
+                <h3>Technology Utilization</h3>
+                <p>
+                    How often students use digital devices, platforms,
+                    applications, and AI tools in their daily routines.
+                </p>
+            </article>
+
+            <article class="research-card reveal">
+                <span class="research-card-number">02</span>
+                <h3>Purpose of Use</h3>
+                <p>
+                    How students divide their technology use between
+                    academic activities and nonacademic activities.
+                </p>
+            </article>
+
+            <article class="research-card reveal">
+                <span class="research-card-number">03</span>
+                <h3>Academic Performance</h3>
+                <p>
+                    How students' technology-use patterns relate to their
+                    academic tasks, learning experiences, and performance.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- DISCUSSION -->
+
 <section class="topic-section" id="discussion">
     <div class="container">
-        <div class="section-label">03 / Key Discussions</div>
+        <div class="section-heading reveal">
+            <div class="section-label">04 / Discussion</div>
 
-        <h2 class="section-title">The many sides of artificial intelligence.</h2>
+            <h2 class="section-title">
+                The many sides of <em>technology use.</em>
+            </h2>
 
-        <p class="section-description">
-            Explore how AI intersects with the academic and technical
-            experiences of Computer Engineering students.
-        </p>
+            <p class="section-description">
+                Technology plays an important role in higher education,
+                especially in the academic performance of students by
+                providing access to information, communication, and learning
+                resources. However, the use of such technology can also
+                bring challenges that may affect students' academic
+                performance. The following discussions examine how
+                technology is used in learning and how it affects students,
+                particularly in their academic activities and performance.
+            </p>
+        </div>
 
         <div class="topic-grid">
 
-            <article class="topic-card">
-                <img
-                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
-                    alt="Student using a laptop">
+            <article class="topic-card reveal">
+
+                <div class="topic-image-wrap">
+                    <img
+                        src="https://tse2.mm.bing.net/th/id/OIP.g5CUYpQuqhxcduM_7s-eywHaEo?r=0&w=500&h=313&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Student using a laptop">
+
+                    <em class="image-source">
+                        Source: <a href="https://tse2.mm.bing.net/th/id/OIP.g5CUYpQuqhxcduM_7s-eywHaEo?r=0&w=500&h=313&rs=1&pid=ImgDetMain&o=7&rm=3" target="_blank" rel="noopener noreferrer">automation.com</a>
+                    </em>
+                </div>
+
                 <div class="topic-card-content">
-                    <small>01 / Learning</small>
-                    <h3>AI as a Learning Assistant</h3>
+                    <small>01 / Academic Performance</small>
+                    <h3>Technology Use and Academic Performance</h3>
+
                     <p>
-                        Explore how AI tools help students understand
-                        difficult concepts, review lessons, and access
-                        additional learning resources.
+                        <a href="https://doi.org/10.3389/fpsyg.2025.1524645"
+                           target="_blank" rel="noopener noreferrer">Kuş (2025)</a>,
+                        through a meta-analysis involving 124,166 students
+                        from 28 countries, found a small but significant
+                        negative association between technology-related
+                        activities and academic performance.
+                    </p>
+
+                    <p>
+                        In contrast,
+                        <a href="https://doi.org/10.55927/eajmr.v2i6.4055"
+                           target="_blank" rel="noopener noreferrer">Rizada and Rey (2023)</a>
+                        demonstrated that technology-assisted instruction
+                        can improve students' mathematics performance,
+                        showing how technology can support learning when
+                        used properly and effectively.
+                    </p>
+
+                    <p>
+                        The contradiction may have come from how technology
+                        was used. Kuş (2025) focused on general technology
+                        activities, which may include distractions and
+                        non-academic use. Rizada and Rey (2023), on the
+                        other hand, focused on structured, teacher-guided
+                        use. It suggests that the purpose and quality of
+                        use matters more than the amount of technology used.
                     </p>
                 </div>
             </article>
 
-            <article class="topic-card">
-                <img
-                    src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=900&q=85"
-                    alt="Computer programming displayed on a monitor">
+            <article class="topic-card reveal">
+
+                <div class="topic-image-wrap">
+                    <img
+                        src="https://pidswebs.pids.gov.ph/CDN/featured-image/Thumbnail-for-PR6.jpg"
+                        alt="Student organizing academic work">
+
+                    <em class="image-source">
+                        Source: <a href="https://pidswebs.pids.gov.ph/CDN/featured-image/Thumbnail-for-PR6.jpg" target="_blank" rel="noopener noreferrer">pids.gov.ph</a>
+                    </em>
+                </div>
+
                 <div class="topic-card-content">
-                    <small>02 / Technology</small>
-                    <h3>AI in Programming</h3>
+                    <small>02 / Learning Environment</small>
+                    <h3>Adjustment to Hybrid Learning</h3>
+
                     <p>
-                        Examine how AI-assisted coding affects debugging,
-                        code comprehension, and the development of
-                        programming skills.
+                        <a href="https://doi.org/10.22492/ije.12.2.06"
+                           target="_blank" rel="noopener noreferrer">Firmante (2024)</a>
+                        studied the experiences of Filipino first-year
+                        engineering students in adjusting to post-pandemic
+                        hybrid learning. It emphasized the point that
+                        students' academic success is influenced by their
+                        ability to adjust to hybrid learning, particularly
+                        in terms of self-management and social support.
                     </p>
                 </div>
             </article>
 
-            <article class="topic-card">
-                <img
-                    src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85"
-                    alt="Electronic circuit board">
+            <article class="topic-card reveal">
+
+                <div class="topic-image-wrap">
+                    <img
+                        src="https://ddc514qh7t05d.cloudfront.net/dA/306c595ccd13fc6a6dbe70ea529c7c14/2400w/80q"
+                        alt="Computer hardware and electronic components">
+
+                    <em class="image-source">
+                        Source: <a href="https://ddc514qh7t05d.cloudfront.net/dA/306c595ccd13fc6a6dbe70ea529c7c14/2400w/80q" target="_blank" rel="noopener noreferrer">context.news</a>
+                    </em>
+                </div>
+
                 <div class="topic-card-content">
-                    <small>03 / Computer Engineering</small>
-                    <h3>AI Beyond Software</h3>
+                    <small>03 / Digital Access</small>
+                    <h3>Technology Access and Institutional Support</h3>
+
                     <p>
-                        Discover the connection between AI, electronics,
-                        embedded systems, robotics, and other CpE fields.
+                        <a href="https://doi.org/10.54676/XKHI4627"
+                           target="_blank" rel="noopener noreferrer">Espinosa et al. (2023)</a>
+                        identified poor internet connectivity, unequal
+                        access to technology, and limited institutional
+                        readiness as major challenges in Philippine
+                        education. These findings show that not all
+                        students have the same access to learning resources,
+                        which may affect how students complete their
+                        academic tasks and participate in technology-based
+                        learning.
                     </p>
                 </div>
             </article>
 
-            <article class="topic-card">
-                <img
-                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=85"
-                    alt="Research and academic work">
+            <article class="topic-card reveal">
+
+                <div class="topic-image-wrap">
+                    <img
+                        src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85"
+                        alt="Student studying and taking notes">
+
+                    <em class="image-source">
+                        Source: <a href="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                    </em>
+                </div>
+
                 <div class="topic-card-content">
-                    <small>04 / Academic Impact</small>
-                    <h3>Productivity and Efficiency</h3>
+                    <small>04 / Student Agency</small>
+                    <h3>Self-Regulation and Digital Literacy</h3>
+
                     <p>
-                        Investigate how AI may influence task completion,
-                        research activities, and academic productivity.
+                        <a href="https://doi.org/10.3390/educsci13111131"
+                           target="_blank" rel="noopener noreferrer">Briones et al. (2023)</a>
+                        found that students had moderate engagement and
+                        good self-regulation skills. The study explains
+                        how student success in online learning depends on
+                        how well they manage their own learning. It
+                        highlighted the importance of student engagement,
+                        self-regulation, and self-efficacy in online
+                        learning to achieve better learning outcomes.
+                    </p>
+
+                    <p>
+                        Likewise,
+                        <a href="https://doi.org/10.22521/edupij.2025.15.112"
+                           target="_blank" rel="noopener noreferrer">Gayrama (2025)</a>
+                        found that motivation and self-regulation contribute
+                        to students' confidence in using educational
+                        technology. The findings demonstrate the benefits
+                        of digital literacy when it comes to student success.
+                    </p>
+
+                    <p>
+                        Overall, the studies of Briones et al. (2023) and
+                        Gayrama (2025) show that the academic performance
+                        of students relies more on how the students are
+                        able to manage themselves when it comes to
+                        technology-based learning.
                     </p>
                 </div>
             </article>
 
-            <article class="topic-card">
-                <img
-                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
-                    alt="Person working on a computer">
+            <article class="topic-card reveal">
+
+                <div class="topic-image-wrap">
+                    <img
+                        src="https://i.pinimg.com/1200x/19/43/61/194361c7d07796405329182fe1be778d.jpg"
+                        alt="Artificial intelligence concept">
+
+                    <em class="image-source">
+                        Source: <a href="https://i.pinimg.com/1200x/19/43/61/194361c7d07796405329182fe1be778d.jpg" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                    </em>
+                </div>
+
                 <div class="topic-card-content">
-                    <small>05 / Challenges</small>
-                    <h3>Dependency and Critical Thinking</h3>
+                    <small>05 / Artificial Intelligence</small>
+                    <h3>Risks of AI in Higher Education</h3>
+
                     <p>
-                        Consider the risks of overreliance on AI and its
-                        possible effects on independent problem-solving.
+                        <a href="https://doi.org/10.22329/jtl.v19i4.9790"
+                           target="_blank" rel="noopener noreferrer">Hortelano and Salamia (2025)</a>
+                        identified both the benefits and risks of artificial
+                        intelligence in higher education, including concerns
+                        about overreliance and misinformation. Their findings
+                        showed that students saw AI as a useful tool for
+                        learning, but they were also concerned about relying
+                        too much on it and receiving inaccurate information.
                     </p>
                 </div>
             </article>
 
-            <article class="topic-card">
-                <img
-                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
-                    alt="Students collaborating">
+            <article class="topic-card reveal">
+
+                <div class="topic-image-wrap">
+                    <img
+                        src="https://tse4.mm.bing.net/th/id/OIP.1Wi0qx-NGWE3y5uVyoDz0wHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Students working together">
+
+                    <em class="image-source">
+                        Source: <a href="https://tse4.mm.bing.net/th/id/OIP.1Wi0qx-NGWE3y5uVyoDz0wHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" target="_blank" rel="noopener noreferrer">pia.gov.ph</a>
+                    </em>
+                </div>
+
                 <div class="topic-card-content">
-                    <small>06 / Responsibility</small>
-                    <h3>Ethical and Responsible AI Use</h3>
+                    <small>06 / Overall Perspective</small>
+                    <h3>Conclusion</h3>
+
                     <p>
-                        Discuss academic honesty, data privacy,
-                        misinformation, and responsible AI practices.
+                        Taking everything into consideration, technology
+                        can either help or hinder the academic performance
+                        of students. They may only really benefit from
+                        technology when its use is guided and purposeful.
+                        Moreover, their success relies on self-regulation,
+                        digital literacy, and confidence in using such
+                        technology.
                     </p>
                 </div>
             </article>
@@ -803,22 +1750,25 @@ footer {
     </div>
 </section>
 
-<!-- =====================================================
-     RESEARCH VARIABLES / COMPARISON
-     You can change the table headings and rows.
-     ===================================================== -->
-<section>
+<!-- RESEARCH FRAMEWORK -->
+
+<section class="framework-section">
     <div class="container">
-        <div class="section-label">04 / Research Framework</div>
+        <div class="section-heading reveal">
+            <div class="section-label">05 / Research Framework</div>
 
-        <h2 class="section-title">Connecting AI use to student outcomes.</h2>
+            <h2 class="section-title">
+                Connecting technology use to <em>student outcomes.</em>
+            </h2>
 
-        <p class="section-description">
-            Use this table to explain the variables and indicators
-            included in your research framework.
-        </p>
+            <p class="section-description">
+                The study considers different aspects of students'
+                technology habits and how these relate to their academic
+                experiences.
+            </p>
+        </div>
 
-        <div class="table-wrapper">
+        <div class="table-wrapper reveal">
             <table>
                 <thead>
                     <tr>
@@ -830,185 +1780,268 @@ footer {
 
                 <tbody>
                     <tr>
-                        <td>AI Utilization</td>
-                        <td>Frequency, tools, purpose</td>
-                        <td>How students use AI</td>
+                        <td>Technology Utilization</td>
+                        <td>Frequency, duration, devices, applications</td>
+                        <td>How often students use technology</td>
                     </tr>
 
                     <tr>
-                        <td>Learning Experience</td>
-                        <td>Understanding, engagement</td>
-                        <td>How students learn with AI</td>
+                        <td>Purpose of Use</td>
+                        <td>Research, programming, note-taking, social media, gaming</td>
+                        <td>Why students use technology</td>
+                    </tr>
+
+                    <tr>
+                        <td>Academic Activities</td>
+                        <td>Online research, digital learning, AI-assisted learning</td>
+                        <td>How technology supports academic tasks</td>
+                    </tr>
+
+                    <tr>
+                        <td>Nonacademic Activities</td>
+                        <td>Entertainment, gaming, social networking</td>
+                        <td>How technology may compete with study time</td>
                     </tr>
 
                     <tr>
                         <td>Academic Performance</td>
-                        <td>Task completion, assessment results</td>
-                        <td>Academic outcomes</td>
-                    </tr>
-
-                    <tr>
-                        <td>Critical Thinking</td>
-                        <td>Independent analysis, problem-solving</td>
-                        <td>Development of reasoning skills</td>
+                        <td>Academic records, task completion, learning outcomes</td>
+                        <td>How technology-use patterns relate to performance</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
     </div>
 </section>
 
-<!-- =====================================================
-     SIGNIFICANCE OF THE STUDY
-     ===================================================== -->
-<section id="significance" style="background:var(--bg-light)">
-    <div class="container">
-        <div class="section-label">05 / Significance</div>
+<!-- SIGNIFICANCE -->
 
-        <h2 class="section-title">Why this research matters.</h2>
+<section class="significance-section" id="significance">
+    <div class="container significance-layout">
+        <div class="significance-intro reveal">
+            <div class="section-label">06 / Significance of the Study</div>
 
-        <p class="section-description">
-            Understanding AI's influence can help different
-            stakeholders make informed decisions about its use in education.
-        </p>
+            <h2 class="section-title">
+                Why this research <em>matters.</em>
+            </h2>
 
-        <div class="stakeholder-grid">
-            <article class="stakeholder-card">
-                <h3>Students</h3>
-                <p>
-                    Encourages responsible AI use, independent learning,
-                    and the development of essential technical skills.
-                </p>
+            <p>
+                This study is significant because it aims to determine how
+                the use of technology influences the academic performance
+                of first-year Computer Engineering students. As technology becomes
+                increasingly integrated into education, understanding its
+                benefits and challenges is essential in promoting effective
+                learning practices.
+            </p>
+
+            <p>
+                According to Kuş (2025), a meta-analysis involving 124,166
+                students from 28 countries found a small but statistically
+                significant negative association between technology-related
+                behaviors, such as smartphone use, social media use, and
+                video gaming, and academic performance. Meanwhile, Viloan
+                et al. (2024) emphasized that digital technologies can
+                support students' learning by providing access to
+                information, educational resources, and opportunities for
+                communication and collaboration. Therefore, this study
+                may provide valuable insights into how students' use of
+                technology relates to their academic achievement.
+            </p>
+
+            <p>
+                Specifically, this study will benefit the following:
+            </p>
+        </div>
+
+        <div class="stakeholder-list">
+            <article class="stakeholder-card reveal">
+                <span class="stakeholder-number">01</span>
+                <div>
+                    <h3>Students</h3>
+                    <p>
+                        This study will help first-year Computer Engineering
+                        students understand how their use of technology may
+                        influence their academic performance. It may
+                        encourage them to develop responsible technology
+                        habits, manage their screen time, minimize digital
+                        distractions, and maximize the use of technological
+                        resources for academic purposes.
+                    </p>
+                </div>
             </article>
 
-            <article class="stakeholder-card">
-                <h3>Educators</h3>
-                <p>
-                    Provides insights into students' AI practices and
-                    opportunities to improve teaching strategies.
-                </p>
+            <article class="stakeholder-card reveal">
+                <span class="stakeholder-number">02</span>
+                <div>
+                    <h3>Teachers and Instructors</h3>
+                    <p>
+                        The findings may provide teachers and instructors
+                        with a better understanding of how technology
+                        affects students' learning experiences and academic
+                        performance. This may help them develop appropriate
+                        teaching strategies and encourage the productive
+                        use of digital tools in classroom activities.
+                    </p>
+                </div>
             </article>
 
-            <article class="stakeholder-card">
-                <h3>Educational Institutions</h3>
-                <p>
-                    Supports the development of appropriate guidelines
-                    and policies for AI integration in education.
-                </p>
+            <article class="stakeholder-card reveal">
+                <span class="stakeholder-number">03</span>
+                <div>
+                    <h3>School Administrators</h3>
+                    <p>
+                        This study may serve as a reference for school
+                        administrators in developing policies, programs,
+                        and initiatives that promote responsible and
+                        effective technology use in the academic environment.
+                        It may also help identify areas where students need
+                        additional technological support and guidance.
+                    </p>
+                </div>
             </article>
 
-            <article class="stakeholder-card">
-                <h3>Future Researchers</h3>
-                <p>
-                    Offers a foundation for further investigations into
-                    AI, education, and Computer Engineering.
-                </p>
+            <article class="stakeholder-card reveal">
+                <span class="stakeholder-number">04</span>
+                <div>
+                    <h3>Future Researchers</h3>
+                    <p>
+                        This study may serve as a reference for future
+                        researchers who wish to explore the relationship
+                        between technology use and academic performance.
+                        It may also provide a foundation for further
+                        investigations involving other academic programs,
+                        year levels, institutions, and factors affecting
+                        students' educational achievement.
+                    </p>
+                </div>
             </article>
         </div>
     </div>
 </section>
 
-<!-- =====================================================
-     DEVELOPERS
-     Replace the placeholder image paths with your members'
-     actual photos. Example: images/matthew.jpg
-     ===================================================== -->
+<!-- DEVELOPERS -->
+
 <section class="developers-section" id="developers">
     <div class="container">
-        <div class="section-label">06 / The People Behind the Research</div>
+        <div class="section-heading reveal">
+            <div class="section-label">07 / The People Behind the Research</div>
 
-        <h2 class="section-title">Meet the developers.</h2>
+            <h2 class="section-title">
+                Meet the <em>developers.</em>
+            </h2>
 
-        <p class="section-description">
-            The students behind CPExplore, bringing research,
-            technology, and curiosity together.
-        </p>
+            <p class="section-description">
+                The students behind CPExplore, driven by curiosity to explore.
+            </p>
+        </div>
 
         <div class="developer-grid">
 
-            <!-- Duplicate this card to add another developer. -->
-            <article class="developer-card">
-                <img src="images/alday.png" alt="Cassey Andrei Alday">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/alday.png" alt="Cassey Andrei Alday">
+                </div>
                 <div class="developer-info">
                     <h3>Alday, Cassey Andrei M.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/bautista.png" alt="Matthew Bautista">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/bautista.png" alt="Matthew Bautista">
+                </div>
                 <div class="developer-info">
                     <h3>Bautista, Matthew A.</h3>
                     <p>Web Developer</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/catapang.jpg" alt="Twinkle Nicole Catapang">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/catapang.jpeg" alt="Twinkle Nicole Catapang">
+                </div>
                 <div class="developer-info">
                     <h3>Catapang, Twinkle Nicole P.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/co.png" alt="Rowhilljohn Co">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/co.png" alt="Rowhilljohn Co">
+                </div>
                 <div class="developer-info">
                     <h3>Co, Rowhilljohn Q.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/efondo.jpg" alt="Jade Alexandra Efondo">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/efondo.jpg" alt="Jade Alexandra Efondo">
+                </div>
                 <div class="developer-info">
                     <h3>Efondo, Jade Alexandra M.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/idanan.jpg" alt="Bea Bianca Idanan">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/idanan.jpg" alt="Bea Bianca Idanan">
+                </div>
                 <div class="developer-info">
                     <h3>Idanan, Bea Bianca D.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/mina.jpg" alt="Hannah Althea Miña">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/mina.jpg" alt="Hannah Althea Miña">
+                </div>
                 <div class="developer-info">
                     <h3>Miña, Hannah Althea Marie M.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/molabe.jpg" alt="Jessica Molabe">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/molabe.jpg" alt="Jessica Molabe">
+                </div>
                 <div class="developer-info">
                     <h3>Molabe, Jessica O.</h3>
                     <p>Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/sarmiento.png" alt="Emerald Sarmiento">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/sarmiento.png" alt="Emerald Sarmiento">
+                </div>
                 <div class="developer-info">
                     <h3>Sarmiento, Emerald P.</h3>
                     <p>Web Developer</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/soberano.jpg" alt="Jaica Soberano">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/soberano.png" alt="Jaica Soberano">
+                </div>
                 <div class="developer-info">
                     <h3>Soberano, Jaica S.</h3>
-                    <p>Leader/Researcher</p>
+                    <p>Leader / Researcher</p>
                 </div>
             </article>
 
-            <article class="developer-card">
-                <img src="images/villaflor.jpg" alt="Ashlene Joyce Villaflor">
+            <article class="developer-card reveal">
+                <div class="developer-image-wrap">
+                    <img src="images/villaflor.png" alt="Ashlene Joyce Villaflor">
+                </div>
                 <div class="developer-info">
                     <h3>Villaflor, Ashlene Joyce S.</h3>
                     <p>Web Developer</p>
@@ -1019,103 +2052,231 @@ footer {
     </div>
 </section>
 
-<!-- =====================================================
-     REFERENCES
-     Use APA 7 formatting and include the sources for
-     photographs as well as research information.
-     ===================================================== -->
-<section class="references" id="references">
-    <div class="container">
-        <div class="section-label">07 / Sources</div>
+<!-- REFERENCES -->
 
-        <h2 class="section-title">References</h2>
+<section class="references-section" id="references">
+    <div class="container references-layout">
+        <div class="references-intro reveal">
+            <div class="section-label">08 / Sources</div>
 
-        <p class="section-description">
-            Research materials, academic publications, and
-            photographic sources used in this website.
-        </p>
+            <h2 class="section-title">
+                Research and <em>references.</em>
+            </h2>
 
-        <ol class="reference-list">
-            <!-- Add your verified research references here. -->
-            <li>
-                UNESCO. (2023).
-                <em>Guidance for generative AI in education and research.</em>
-                <a href="https://unesdoc.unesco.org/ark:/48223/pf0000386693"
-                   target="_blank" rel="noopener noreferrer">
-                    View source
-                </a>.
-            </li>
+            <p>
+                The studies and publications below provide the academic
+                foundation for the discussions presented in CPExplore.
+            </p>
+        </div>
 
-            <li>
-                <!-- Add more APA 7 sources here. -->
-                Add your research source here.
-            </li>
+        <div class="reveal">
 
-            <li>
-                <!-- Add the photographer, date, title, and image platform. -->
-                Add your photograph credit here.
-            </li>
-        </ol>
+            <h3 class="reference-category">Academic References</h3>
+
+            <ol class="reference-list">
+
+                <li>
+                    Briones, M. R., Prudente, M., &amp; Errabo, D. D. (2023).
+                    Characteristics of Filipino online learners: A survey
+                    of science education students' engagement,
+                    self-regulation, and self-efficacy.
+                    <em>Education Sciences, 13</em>(11), 1131.
+                    <a href="https://doi.org/10.3390/educsci13111131"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.3390/educsci13111131
+                    </a>
+                </li>
+
+                <li>
+                    Espinosa, A. A., Gomez, M. A. C., Miranda, P. A., et al.
+                    (2023). <em>Technology in education: A case study on
+                    the Philippines.</em> UNESCO Global Education
+                    Monitoring Report.
+                    <a href="https://doi.org/10.54676/XKHI4627"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.54676/XKHI4627
+                    </a>
+                </li>
+
+                <li>
+                    Firmante, M. C. M. (2024). Academic and social
+                    adjustment to post-pandemic hybrid learning: A
+                    phenomenological study of Filipino first-year
+                    engineering students' experiences.
+                    <em>IAFOR Journal of Education, 12</em>(2), 127–148.
+                    <a href="https://doi.org/10.22492/ije.12.2.06"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.22492/ije.12.2.06
+                    </a>
+                </li>
+
+                <li>
+                    Gayrama, V. P. (2025). Motivation in self-regulated
+                    learning and technology-use efficacy among Filipino
+                    university students on an island.
+                    <em>Educational Process: International Journal, 15</em>,
+                    e2025112.
+                    <a href="https://doi.org/10.22521/edupij.2025.15.112"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.22521/edupij.2025.15.112
+                    </a>
+                </li>
+
+                <li>
+                    Hortelano, J. C., &amp; Salamia, S. (2025).
+                    Perceptions of artificial intelligence among
+                    Philippine undergraduate students.
+                    <em>Journal of Teaching and Learning, 19</em>(4),
+                    52–71.
+                    <a href="https://doi.org/10.22329/jtl.v19i4.9790"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.22329/jtl.v19i4.9790
+                    </a>
+                </li>
+
+                <li>
+                    Kuş, M. (2025). A meta-analysis of the impact of
+                    technology-related factors on students' academic
+                    performance. <em>Frontiers in Psychology, 16.</em>
+                    <a href="https://doi.org/10.3389/fpsyg.2025.1524645"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.3389/fpsyg.2025.1524645
+                    </a>
+                </li>
+
+                <li>
+                    Rizada, C. S., &amp; Rey, R. P. (2023). Effects of
+                    using technology on the academic performance in
+                    mathematics of college millennial learners.
+                    <em>East Asian Journal of Multidisciplinary Research,
+                    2</em>(6), 2495–2508.
+                    <a href="https://doi.org/10.55927/eajmr.v2i6.4055"
+                       target="_blank" rel="noopener noreferrer">
+                        https://doi.org/10.55927/eajmr.v2i6.4055
+                    </a>
+                </li>
+
+                <li>
+                    Viloan, L., et al. (2024). The influence of digital
+                    technology on students' perceived academic performance.
+                    <em>Psychology and Education: A Multidisciplinary
+                    Journal.</em>
+                    <a href="https://ejournals.ph/article.php?id=27054"
+                       target="_blank" rel="noopener noreferrer">
+                        https://ejournals.ph/article.php?id=27054
+                    </a>
+                </li>
+
+            </ol>
+
+        </div>
     </div>
 </section>
+
 </main>
 
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
 <footer>
-    <div class="container footer-content">
-        <p>© 2026 CPExplore</p>
-        <p>Exploring the future, one algorithm at a time.</p>
+    <div class="container">
+        <div class="footer-top">
+            <a href="#home" class="footer-logo">CPE<span>xplore</span></a>
+
+            <p class="footer-tagline">
+                Fueled by curiosity. Driven by discovery.
+            </p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 CPExplore. All rights reserved.</p>
+            <p>Beyond the Coding · Where Curiosity Meets Engineering.</p>
+        </div>
     </div>
 </footer>
 
+<a href="#home" class="back-to-top" aria-label="Back to top">↑</a>
+
 <script>
-const sectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+/* ACTIVE NAVIGATION */
+
+const sectionLinks = Array.from(
+    document.querySelectorAll('.nav-links a[href^="#"]')
+);
+
 const linkedSections = sectionLinks
     .map(link => document.getElementById(link.hash.slice(1)))
     .filter(Boolean);
 
 function updateActiveSection() {
     const headerHeight = document.querySelector('header').offsetHeight;
-    const scrollPadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-    const marker = window.scrollY + Math.max(headerHeight, scrollPadding) + 1;
+    const marker = window.scrollY + headerHeight + 30;
     let activeSection = linkedSections[0];
 
     for (const section of linkedSections) {
-        if (section.getBoundingClientRect().top + window.scrollY <= marker) {
+        if (section.offsetTop <= marker) {
             activeSection = section;
-        } else {
-            break;
         }
     }
 
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+    if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 5
+    ) {
         activeSection = linkedSections[linkedSections.length - 1];
     }
 
-    for (const link of sectionLinks) {
-        const isActive = link.hash === `#${activeSection.id}`;
-        link.classList.toggle('active', isActive);
-        if (isActive) {
+    sectionLinks.forEach(link => {
+        const active = link.hash === `#${activeSection.id}`;
+
+        link.classList.toggle('active', active);
+
+        if (active) {
             link.setAttribute('aria-current', 'location');
         } else {
             link.removeAttribute('aria-current');
         }
-    }
+    });
 }
 
 window.addEventListener('scroll', updateActiveSection, { passive: true });
 window.addEventListener('resize', updateActiveSection);
 updateActiveSection();
+
+/* SCROLL REVEAL */
+
+const revealElements = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12
+    });
+
+    revealElements.forEach(element => {
+        revealObserver.observe(element);
+    });
+} else {
+    revealElements.forEach(element => {
+        element.classList.add('visible');
+    });
+}
+
+/* BACK TO TOP */
+
+const backToTop = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+}, { passive: true });
 </script>
 
 </body>
 </html>
-echo "# TCW" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/mattelune/TCW.git
-git push -u origin main
